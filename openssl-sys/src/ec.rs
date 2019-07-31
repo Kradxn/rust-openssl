@@ -95,6 +95,15 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> c_int;
 
+     pub fn EC_POINT_set_affine_coordinates_GFp(
+        group: *const EC_GROUP,
+        p: *const EC_POINT,
+        x: *const BIGNUM,
+        y: *const BIGNUM,
+        ctx: *mut BN_CTX,
+    ) -> c_int;
+
+
     #[cfg(not(osslconf = "OPENSSL_NO_EC2M"))]
     pub fn EC_POINT_get_affine_coordinates_GF2m(
         group: *const EC_GROUP,
