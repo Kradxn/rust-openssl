@@ -505,7 +505,7 @@ impl EcPointRef {
             ))
             .map(|_| ())
         }
-    
+    }
 
        /// Sets affine coordinates of a curve over a prime field in the provided
     /// `x` and `y` `BigNum`s
@@ -531,7 +531,7 @@ impl EcPointRef {
             .map(|_| ())
         }
     }
-    } 
+     
 
     /// Place affine coordinates of a curve over a binary field in the provided
     /// `x` and `y` `BigNum`s
