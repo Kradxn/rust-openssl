@@ -505,7 +505,33 @@ impl EcPointRef {
             ))
             .map(|_| ())
         }
+    
+
+       /// Sets affine coordinates of a curve over a prime field in the provided
+    /// `x` and `y` `BigNum`s
+    ///
+    /// OpenSSL documentation at [`EC_POINT_get_affine_coordinates_GFp`]
+    ///
+    /// [`EC_POINT_get_affine_coordinates_GFp`]: https://www.openssl.org/docs/man1.1.0/crypto/EC_POINT_get_affine_coordinates_GFp.html
+    pub fn set_affine_coordinates_gfp(
+        &self,
+        group: &EcGroupRef,
+        x: &mut BigNumRef,
+        y: &mut BigNumRef,
+        ctx: &mut BigNumContextRef,
+    ) -> Result<(), ErrorStack> {
+        unsafe {
+            cvt(ffi::EC_POINT_set_affine_coordinates_GFp(
+                group.as_ptr(),
+                self.as_ptr(),
+                x.as_ptr(),
+                y.as_ptr(),
+                ctx.as_ptr(),
+            ))
+            .map(|_| ())
+        }
     }
+    } 
 
     /// Place affine coordinates of a curve over a binary field in the provided
     /// `x` and `y` `BigNum`s
