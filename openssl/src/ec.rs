@@ -545,7 +545,7 @@ impl EcPointRef {
                   self.as_ptr(),
                   ctx.as_ptr(),
               ))?;
-              Ok(res == 0)
+              Ok(res == 1)
           }
       }
       /// Sets compressed coordinates of a curve over a prime field in the provided
