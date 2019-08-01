@@ -531,9 +531,24 @@ impl EcPointRef {
             .map(|_| ())
         }
     }
-    
+   
 
-    /// Sets compressed coordinates of a curve over a prime field in the provided
+
+      pub fn is_on_curve(
+          &self,
+          group: &EcGroupRef,
+          ctx: &mut BigNumContextRef,
+      ) -> Result<(bool), ErrorStack> {
+          unsafe {
+              let res = cvt_n(ffi::EC_POINT_is_on_curve(
+                  group.as_ptr(),
+                  self.as_ptr(),
+                  ctx.as_ptr(),
+              ))?;
+              Ok(res == 0)
+          }
+      }
+      /// Sets compressed coordinates of a curve over a prime field in the provided
     /// `x` BigNum and `y` u32 ybit
     ///
     /// OpenSSL documentation at [`EC_POINT_set_compressed_coordinates_GFp`]
