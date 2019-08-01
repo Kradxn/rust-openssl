@@ -531,6 +531,32 @@ impl EcPointRef {
             .map(|_| ())
         }
     }
+    
+
+    /// Sets compressed coordinates of a curve over a prime field in the provided
+    /// `x` BigNum and `y` u32 ybit
+    ///
+    /// OpenSSL documentation at [`EC_POINT_set_compressed_coordinates_GFp`]
+    ///
+    /// [`EC_POINT_set_compressed_coordinates_GFp`]: https://www.openssl.org/docs/man1.1.0/crypto/EC_POINT_set_affine_coordinates_GFp.html
+    pub fn set_compressed_coordinates_gfp(
+        &self,
+        group: &EcGroupRef,
+        x: &BigNumRef,
+        y: i32,
+        ctx: &mut BigNumContextRef,
+    ) -> Result<(), ErrorStack> {
+        unsafe {
+            cvt(ffi::EC_POINT_set_compressed_coordinates_GFp(
+                group.as_ptr(),
+                self.as_ptr(),
+                x.as_ptr(),
+                y,
+                ctx.as_ptr(),
+            ))
+            .map(|_| ())
+        }
+    }
      
 
     /// Place affine coordinates of a curve over a binary field in the provided
