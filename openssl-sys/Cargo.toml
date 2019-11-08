@@ -8,7 +8,6 @@ description = "FFI bindings to OpenSSL"
 repository = "https://github.com/sfackler/rust-openssl"
 readme = "README.md"
 categories = ["cryptography", "external-ffi-bindings"]
-links = "openssl"
 build = "build/main.rs"
 
 [features]
